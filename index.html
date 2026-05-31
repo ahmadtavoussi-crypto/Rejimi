@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>رژیم هوشمند</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      html, body, #root {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Prevent body scroll when stepper is visible */
+      }
+      body {
+        font-family: 'Vazirmatn', sans-serif;
+      }
+      .perspective-container {
+        perspective: 1000px;
+      }
+      .flipper-front, .flipper-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden; /* Safari */
+        backface-visibility: hidden;
+      }
+      .flipper-back {
+        transform: rotateY(180deg);
+      }
+      .trace-animation {
+        stroke-dasharray: 1 1;
+        animation: trace 1s cubic-bezier(0.65, 0, 0.45, 1);
+        animation-fill-mode: both; /* Ensures start/end states are kept */
+      }
+      @keyframes trace {
+        0% {
+          stroke-dashoffset: 1;
+          opacity: 0;
+        }
+        /* Make it visible right after delay ends, but still at starting position */
+        1% {
+          stroke-dashoffset: 1;
+          opacity: 1;
+        }
+        100% {
+          stroke-dashoffset: 0;
+          opacity: 1;
+        }
+      }
+      .checkmark__check {
+        transform-origin: 50% 50%;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        animation: stroke 0.8s cubic-bezier(0.65, 0, 0.45, 1) 0.2s forwards;
+      }
+      @keyframes stroke {
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes fadeIn {
+        to { opacity: 1; }
+      }
+      .fade-in-option-text {
+        opacity: 0;
+        animation: fadeIn 0.4s ease-in 1.8s forwards;
+      }
+      .fade-in-title-text {
+        opacity: 0;
+        animation: fadeIn 0.4s ease-in 1.0s forwards;
+      }
+      .fade-in-half-sec {
+        opacity: 0;
+        animation: fadeIn 0.5s ease-in 0.5s forwards;
+      }
+      .qmark_path {
+        stroke-dasharray: 50;
+        stroke-dashoffset: 50;
+        animation: draw-qmark 1s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+      }
+      @keyframes draw-qmark {
+          to { stroke-dashoffset: 0; }
+      }
+      .qmark_dot {
+          opacity: 0;
+          animation: fade-in-dot 0.5s ease-in 1.5s forwards;
+      }
+      @keyframes fade-out-fast {
+          opacity: 1;
+          animation: fadeOut-fast 0.5s ease-out forwards;
+      }
+      @keyframes un-grayscale {
+        from { filter: grayscale(100%); }
+        to { filter: grayscale(0%); }
+      }
+      @keyframes fade-out-body {
+        0% { opacity: 1; transform: scale(1); }
+        40% { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(0.8); }
+      }
+      @keyframes swing-open-shackle-3d {
+        0% { transform: translateY(0) rotateZ(0deg) rotateY(0deg); opacity: 1; }
+        40% { transform: translateY(-4px) rotateZ(0deg) rotateY(0deg); opacity: 1; }
+        100% { transform: translateY(-4px) rotateZ(-120deg) rotateY(70deg); opacity: 0; }
+      }
+      @keyframes shake-it {
+        10%, 90% { transform: translateX(-1px); }
+        20%, 80% { transform: translateX(2px); }
+        30%, 50%, 70% { transform: translateX(-4px); }
+        40%, 60% { transform: translateX(4px); }
+      }
+      @keyframes halo-pulse {
+        0% { transform: scale(0.9); opacity: 0; }
+        50% { transform: scale(1.5); opacity: 1; }
+        100% { transform: scale(0.8); opacity: 0; }
+      }
+      @keyframes active-halo-pulse {
+        0% { transform: scale(1); opacity: 0.7; }
+        50% { transform: scale(1.3); opacity: 0.9; }
+        100% { transform: scale(1); opacity: 0.7; }
+      }
+       @keyframes fade-out-content {
+        to { opacity: 0; transform: scale(0.8); }
+      }
+      @keyframes fade-in-content {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      @keyframes fade-out-gentle {
+        to { opacity: 0; transform: scale(0.7); }
+      }
+      @keyframes jelly-effect {
+        0%, 100% { transform: scale(1); }
+        25% { transform: scale(0.9, 1.1); }
+        50% { transform: scale(1.1, 0.9); }
+        75% { transform: scale(0.95, 1.05); }
+      }
+      .animate-jelly-effect {
+        animation: jelly-effect 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .animate-fade-out-gentle {
+        animation: fade-out-gentle 0.5s ease-in forwards;
+      }
+      .animate-fade-out-content {
+        animation: fade-out-content 0.4s ease-out forwards;
+      }
+      .animate-fade-in-delayed {
+        opacity: 0;
+        animation: fadeIn 0.4s ease-in 1.2s forwards;
+      }
+      .animate-fade-in-checkmark {
+        opacity: 0;
+        animation: fadeIn 0.4s ease-in 0.5s forwards; /* Delay starts after fade out finishes */
+      }
+      .animate-un-grayscale {
+        animation: un-grayscale 0.8s ease-in-out forwards;
+        animation-delay: 0.2s;
+      }
+      .animate-fade-out-body {
+        animation: fade-out-body 0.8s ease-in-out forwards;
+      }
+      .animate-swing-open-shackle {
+          transform-origin: 16px 11px;
+          animation: swing-open-shackle-3d 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+      }
+      .animate-shake {
+        animation: shake-it 0.6s cubic-bezier(.36,.07,.19,.97) both;
+      }
+      .animate-halo {
+        animation: halo-pulse 1s ease-out both;
+      }
+      .animate-active-halo {
+        animation: active-halo-pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      .halo-background {
+        background: radial-gradient(circle, rgba(45, 212, 191, 0.6) 20%, rgba(45, 212, 191, 0.3) 50%, rgba(45, 212, 191, 0) 70%);
+        z-index: -1;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^18.2.0/",
+    "react": "https://esm.sh/react@^18.2.0",
+    "react-dom/": "https://esm.sh/react-dom@^18.2.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.15.0",
+    "path": "https://esm.sh/path@^0.12.7",
+    "vite": "https://esm.sh/vite@^7.1.3",
+    "url": "https://aistudiocdn.com/url@^0.11.4"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+<link rel="stylesheet" href="/animation.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

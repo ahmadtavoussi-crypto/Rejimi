@@ -1,0 +1,8 @@
+{
+  "name": "هوشمندانه",
+  "description": "با پاسخ به چند سوال، برنامه غذایی شخصی‌سازی شده خود را بر اساس هوش مصنوعی دریافت کنید.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,237 @@
+/**
+ * Smart Diet Planner - Interactive CSS Animations & Keyframes
+ * Extracted and optimized for standard PHP deployments & React.
+ */
+
+/* 1. Orbit & Path Tracing Animation */
+.trace-animation {
+    stroke-dasharray: 1 1;
+    animation: trace 1s cubic-bezier(0.65, 0, 0.45, 1);
+    animation-fill-mode: both;
+}
+
+@keyframes trace {
+    0% {
+        stroke-dashoffset: 1;
+        opacity: 0;
+    }
+    1% {
+        stroke-dashoffset: 1;
+        opacity: 1;
+    }
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+/* 2. Checkmark stroke completion */
+.checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.8s cubic-bezier(0.65, 0, 0.45, 1) 0.2s forwards;
+}
+
+@keyframes stroke {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* 3. Option and title fading transitions */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in-option-text {
+    opacity: 0;
+    animation: fadeIn 0.4s ease-in 1.8s forwards;
+}
+
+.fade-in-title-text {
+    opacity: 0;
+    animation: fadeIn 0.4s ease-in 1.0s forwards;
+}
+
+.fade-in-half-sec {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in 0.5s forwards;
+}
+
+/* 4. Question Mark drawing sequence */
+.qmark_path {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: draw-qmark 1s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+}
+
+@keyframes draw-qmark {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.qmark_dot {
+    opacity: 0;
+    animation: fade-in-dot 0.5s ease-in 1.5s forwards;
+}
+
+@keyframes fade-in-dot {
+    to {
+        opacity: 1;
+    }
+}
+
+/* 5. Shaking, jellies, and micro interactions */
+@keyframes shake-it {
+    10%, 90% {
+        transform: translateX(-1px);
+    }
+    20%, 80% {
+        transform: translateX(2px);
+    }
+    30%, 50%, 70% {
+        transform: translateX(-4px);
+    }
+    40%, 60% {
+        transform: translateX(4px);
+    }
+}
+
+.animate-shake {
+    animation: shake-it 0.6s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes jelly-effect {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(0.9, 1.1);
+    }
+    50% {
+        transform: scale(1.1, 0.9);
+    }
+    75% {
+        transform: scale(0.95, 1.05);
+    }
+}
+
+.animate-jelly-effect {
+    animation: jelly-effect 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes fade-out-gentle {
+    to {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+}
+
+.animate-fade-out-gentle {
+    animation: fade-out-gentle 0.5s ease-in forwards;
+}
+
+/* 6. Active ring states, pulse and halos */
+@keyframes halo-pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+}
+
+.animate-halo {
+    animation: halo-pulse 1s ease-out both;
+}
+
+@keyframes active-halo-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+}
+
+.animate-active-halo {
+    animation: active-halo-pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.halo-background {
+    background: radial-gradient(circle, rgba(45, 212, 191, 0.6) 20%, rgba(45, 212, 191, 0.3) 50%, rgba(45, 212, 191, 0) 70%);
+    z-index: -1;
+}
+
+/* 7. Stepper lock and unlock animations */
+@keyframes un-grayscale {
+    from {
+        filter: grayscale(100%);
+    }
+    to {
+        filter: grayscale(0%);
+    }
+}
+
+.animate-un-grayscale {
+    animation: un-grayscale 0.8s ease-in-out forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes swing-open-shackle-3d {
+    0% {
+        transform: translateY(0) rotateZ(0deg) rotateY(0deg);
+        opacity: 1;
+    }
+    40% {
+        transform: translateY(-4px) rotateZ(0deg) rotateY(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-4px) rotateZ(-120deg) rotateY(70deg);
+        opacity: 0;
+    }
+}
+
+.animate-swing-open-shackle {
+    transform-origin: 16px 11px;
+    animation: swing-open-shackle-3d 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+/* 8. Extra utilities */
+@keyframes fade-out-content {
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+.animate-fade-out-content {
+    animation: fade-out-content 0.4s ease-out forwards;
+}
+
+.animate-fade-in-delayed {
+    opacity: 0;
+    animation: fadeIn 0.4s ease-in 1.2s forwards;
+}
+
+.animate-fade-in-checkmark {
+    opacity: 0;
+    animation: fadeIn 0.4s ease-in 0.5s forwards;
+}

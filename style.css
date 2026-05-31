@@ -1,0 +1,90 @@
+/**
+ * Smart Diet Planner - Layout Custom Themes
+ * Optimized custom animations and micro-interactions for the PHP & jQuery build.
+ */
+
+@import "tailwindcss";
+
+/* 1. Base overrides */
+body {
+    background-color: #f8fafc;
+    color: #1e293b;
+    font-family: 'Vazirmatn', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 2. Visual Rings animations */
+.ring-transition {
+    transition: stroke-dashoffset 1.4s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.5s ease;
+}
+
+/* Base style for concentric circles */
+svg circle {
+    transform-origin: center;
+    transition: stroke-dashoffset 1.4s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.5s ease;
+}
+
+/* 3. Micro Animations */
+@keyframes pulse-emerald {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+}
+
+.emerald-badge-pulse {
+    animation: pulse-emerald 2s infinite ease-in-out;
+}
+
+/* 4. Scrollbars optimization */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* 5. Warning Popup Animation Keyframes */
+@keyframes countdown {
+    from {
+        width: 105%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.warning-countdown {
+    animation: countdown 5s linear forwards;
+}
+
+.warning-fade-in {
+    animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
